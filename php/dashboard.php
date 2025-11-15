@@ -8,7 +8,7 @@ $result = $conn->query("SELECT * FROM log_parkir ORDER BY waktu DESC");
     <meta charset="UTF-8">
     <title>Dashboard Petugas Parkir</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <meta http-equiv="refresh" content="5"> <!-- auto refresh tiap 5 detik -->
+    <meta http-equiv="refresh" content="5"> 
 </head>
 <body class="bg-light">
 <div class="container mt-5">

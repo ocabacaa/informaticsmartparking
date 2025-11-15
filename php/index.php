@@ -9,11 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nama = $_POST['nama'];
     $nim = strtolower(trim($_POST['nim']));
 
-    // Validasi NIM Informatika
+
     if (!preg_match('/^d104\d{6,8}$/i', $nim)) {
         $msg = "
             <div class='alert alert-danger text-center'>
-                ❌ NIM tidak valid! Hanya mahasiswa Informatika (D104...) yang bisa mengakses.
+                NIM tidak valid! Hanya mahasiswa Informatika yang bisa mengakses.
             </div>
             <div class='text-center mt-3'>
                 <a href='index.php' class='btn btn-dark'>⬅ Kembali ke Halaman Utama</a>
@@ -26,13 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($cek->num_rows > 0) {
             $msg = "
                 <div class='alert alert-warning text-center'>
-                    Anda sudah terdaftar. Gunakan QR Code Anda untuk parkir.
+                    Kamu sudah terdaftar. Gunakan QR Codemu untuk parkir.
                 </div>
             ";
             $row = $cek->fetch_assoc();
             $file = $row['qr_code'];
         } else {
-            // Generate QR
+
             $data = $nim . '-' . $nama;
             $file = "qr/" . $nim . ".png";
 
@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <a href="<?= $file ?>" download class="btn btn-primary mt-2">Download QR Code</a>
 
                 <div class="mt-3">
-                    <a href="index.php" class="btn btn-secondary">⬅ Kembali ke Halaman Utama</a>
+                    <a href="index.php" class="btn btn-secondary">⬅ Kembali</a>
                 </div>
             </div>
         <?php endif; ?>

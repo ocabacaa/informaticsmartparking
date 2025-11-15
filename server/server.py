@@ -12,7 +12,7 @@ db = mysql.connector.connect(
     database="smartparking"
 )
 
-cursor = db.cursor()   # PENTING BANGET
+cursor = db.cursor()
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((HOST, PORT))
@@ -31,18 +31,12 @@ while True:
         nim, nama = data.split("-", 1)
         nim = nim.strip()
 
-        # ===============================
-        # VALIDASI NIM D104 ONLY
-        # ===============================
         if not nim.lower().startswith("d104"):
             client.send(
                 "Bukan mahasiswa informatika! Lapor maksud kedatangan ke petugas parkir.".encode())
             client.close()
             continue
 
-        # ===============================
-        # ANTI SPAM — Cek data 5 detik terakhir
-        # ===============================
         cursor.execute("""
             SELECT id FROM log_parkir
             WHERE nim=%s AND waktu >= NOW() - INTERVAL 5 SECOND
@@ -52,9 +46,6 @@ while True:
             client.close()
             continue
 
-        # ===============================
-        # SIMPAN DATA
-        # ===============================
         cursor.execute(
             "INSERT INTO log_parkir (nim, nama, waktu) VALUES (%s, %s, NOW())",
             (nim, nama)
